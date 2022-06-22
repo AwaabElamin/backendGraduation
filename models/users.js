@@ -28,10 +28,10 @@ class UserCollection {
         try {
             await new_user.save();
             console.log('create:- ', new_user);
-            return {succes:"ok",data:new_user};
+            return {succes:true,data:new_user};
         } catch (error) {
             console.log("eroooor ",error);
-            return {succes:"fail",message:error};
+            return {succes:false,message:error};
         }
        
     }
