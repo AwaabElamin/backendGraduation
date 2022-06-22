@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const usersRouter = require('./routes/users');
 const autherizeRouter = require('./routes/auth');
-const connection =`mongodb+srv://root:123@cluster0.wpzy5.mongodb.net/Maharishi?retryWrites=true&w=majority`;
+const connection =`mongodb+srv://${process.env.dbUserName}:${process.env.dbPassword}@cluster0.wpzy5.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority`;
 
 const app = express();
 
