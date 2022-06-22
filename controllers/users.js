@@ -18,3 +18,8 @@ exports.getAll = async(req,res)=>{
     const users = await usersModel.findAll();
     res.send(users);
 }
+exports.readById = async (req,res) => {
+    const id = req.params.id;
+    const user = await usersModel.findById(id);
+    res.send(user);
+}
