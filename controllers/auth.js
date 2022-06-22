@@ -26,3 +26,23 @@ exports.login = async (req, res) => {
         res.send({ success: false, message: 'Please provide the username and password' })
     }
 }
+
+exports.authorize = (req, res, next) => {
+    if (req.headers.authorization) {
+        const token = req.headers.authorization.split(' ')[1];
+        jwt.verify(token, process.env.private_key,(err, user)=>{
+            req.user = user;
+            if(err){
+                if (err.message.include('expires')) {
+                    res.send({success:false, message:'token is expires'});
+                } else {
+                    res.status(403).send({success: false, message:'Forbidden'});
+                }
+            }else{
+                next();
+            }
+        })
+    } else {
+        res.status(401).send({ success: false, message: 'Unauthenticated' });
+    }
+}
