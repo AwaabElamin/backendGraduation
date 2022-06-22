@@ -14,3 +14,7 @@ exports.create = async (req,res) => {
     console.log('add user', userAdded);
     res.send( userAdded);
 }
+exports.getAll = async(req,res)=>{
+    const users = await usersModel.findAll();
+    res.send(users);
+}
