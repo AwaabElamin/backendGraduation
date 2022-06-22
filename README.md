@@ -48,7 +48,11 @@ backend for final project of Maharishi (Book and Author MIS)
         <br>penalty:{type:String} //$10 for each day late
 
 ## requests and response
+### create new user
 * url:- post /users
+* header:{
+      <br>authorization: Bearer token-value  
+  }
 * body: {
     "username": String,
     "password": "String",
@@ -58,5 +62,18 @@ backend for final project of Maharishi (Book and Author MIS)
     "address": "String"
         }
 * response: {success: true , data: userData}
-        or  {succes: false, message:"String"}
+        or  {success: false, message:"String"}
+### login
+* url:- post /login
+* body: {
+    <br>"username": String,
+    <br>"password": "String"
+     <br>}
+* response: {
+        <br>success: true , 
+        <br>token: userToken, 
+        <br>role: userRole
+        <br>}
+        <br>or  
+        {success: false, message:"String"}
 
