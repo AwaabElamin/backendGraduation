@@ -76,4 +76,17 @@ backend for final project of Maharishi (Book and Author MIS)
         <br>}
         <br>or  
         {success: false, message:"String"}
+### get all users
+* url:- get /users
+* header:{
+      <br>authorization: Bearer token-value  
+  }
+* response: {success: true , data: usersData}
+### find user by id
+### get all users
+* url:- get /users/:id
+* header:{
+      <br>authorization: Bearer token-value  
+  }
+* response: {success: true , data: userData}
 
