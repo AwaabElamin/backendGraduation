@@ -28,22 +28,37 @@ class UserCollection {
         try {
             await new_user.save();
             console.log('create:- ', new_user);
-            return {succes:true,data:new_user};
+            return { success: true, data: new_user };
         } catch (error) {
-            console.log("eroooor ",error);
-            return {succes:false,message:error};
+            console.log('Awaab.code: ',error.code);
+            if (error.code == 11000) {
+                return { success: false, message: "users already exist" };
+            } else {
+                return { success: false, message: error };
+            }
         }
-       
+
     }
     static async findAndUpdate(id, user) {
-        const updatedUser = await userModel.findByIdAndUpdate(id, user);
-        console.log('findAndUpdate:- ', updatedUser);
-        return updatedUser;
+        console.log('id: ', id);
+        try {
+            const updatedUser = await userModel.findByIdAndUpdate(id, user);
+            console.log('findAndUpdate:- ', updatedUser);
+            return { success: true, data: updatedUser };
+        } catch (error) {
+            return { success: false, message: error };
+            
+        }
     }
     static async findAndDelete(id) {
-        const deltedUser = await userModel.findByIdAndDelete(id);
-        console.log('findAndDelete:- ', deltedUser);
-        return deltedUser;
+        try {
+            const deltedUser = await userModel.findByIdAndDelete(id);
+            console.log('findAndDelete:- ', deltedUser);
+            return {success:true, data:deltedUser};
+        } catch (error) {
+            return { success: false, message: error };
+        }
+
     }
 
     //for login perpose

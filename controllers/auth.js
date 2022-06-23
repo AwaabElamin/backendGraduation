@@ -33,8 +33,9 @@ exports.authorize = (req, res, next) => {
         jwt.verify(token, process.env.private_key,(err, user)=>{
             req.user = user;
             if(err){
-                if (err.message.include('expires')) {
-                    res.send({success:false, message:'token is expires'});
+                console.log('err',err);
+                if (err.TokenExpiredError = 'jwt expired') {
+                    res.status(401).send({success:false, message:'token is expires'});
                 } else {
                     res.status(403).send({success: false, message:'Forbidden'});
                 }

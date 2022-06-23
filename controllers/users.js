@@ -23,3 +23,21 @@ exports.readById = async (req,res) => {
     const user = await usersModel.findById(id);
     res.send(user);
 }
+exports.update = async (req,res) => {
+    const user = {
+        username : req.body.username
+        ,password : bcrypt.hashSync(req.body.password, 8)
+        ,role : req.body.role
+        ,email: req.body.email
+        ,phone: req.body.phone
+        ,address: req.body.address
+    }
+    const updatedUser = await usersModel.findAndUpdate(req.body.id,user)
+    res.send(updatedUser);
+}
+exports.delete = async (req,res) => {
+    const id = req.query.id;
+    const deletedUser = await usersModel.findAndDelete(id);
+    console.log('deleted user:- ', deletedUser);
+    res.send(deletedUser);
+}
