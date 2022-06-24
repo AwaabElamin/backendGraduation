@@ -47,3 +47,11 @@ exports.authorize = (req, res, next) => {
         res.status(401).send({ success: false, message: 'Unauthenticated' });
     }
 }
+exports.adminAuthorize = (req, res, next) => {
+    // console.log('req from admin authorization:- ', req.user);
+    if (req.user.role === 'admin') {
+        next();
+    } else {
+        res.send({success: false, message: "Unauthorized. Only admin can change product"})
+    }
+}
