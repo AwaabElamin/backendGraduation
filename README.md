@@ -16,6 +16,7 @@ backend for final project of Maharishi (Book and Author MIS)
 * Return books
 * Search a book(by author or by book details)
 * Add book to cart
+* delete book from card
 ##### Special functions
 * Penalty for late return
 ### collection 
