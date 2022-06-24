@@ -5,7 +5,7 @@ exports.create = async (req,res) => {
     const user = {
         username : req.body.username
         ,password : bcrypt.hashSync(req.body.password, 8) 
-        ,role : req.body.role
+        ,role : "user"
         ,email: req.body.email
         ,phone: req.body.phone
         ,address: req.body.address
@@ -27,12 +27,17 @@ exports.update = async (req,res) => {
     const user = {
         username : req.body.username
         ,password : bcrypt.hashSync(req.body.password, 8)
-        ,role : req.body.role
         ,email: req.body.email
         ,phone: req.body.phone
         ,address: req.body.address
     }
-    const updatedUser = await usersModel.findAndUpdate(req.body.id,user)
+    const updatedUser = await usersModel.findAndUpdate(req.body.id,user);
+    
+    res.send(updatedUser);
+}
+exports.updateRole = async (req,res) => {
+    const updatedUser = await usersModel.findAndUpdateRole(req.body.email,req.body.role)
+    // console.log('update role: ', updatedUser)
     res.send(updatedUser);
 }
 exports.delete = async (req,res) => {
