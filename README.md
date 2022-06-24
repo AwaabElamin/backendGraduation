@@ -20,16 +20,19 @@ backend for final project of Maharishi (Book and Author MIS)
 * Penalty for late return
 ### collection 
 * users: 
-        <br>username: {type: String },
+        <br>username: {type: String,unique: true  },
         <br>password: {type: String},
         <br>email:{type:String,unique:true},
         <br>phone:{type:String},
         <br>role: {type: String},
         <br>address: {type:String} 
 * books:
-        <br>title: {type: String},
+        <br>title: {type: String,unique: true },
         <br>quantity: {type: number},
-        <br>author_name:{type:String},
+        <br>author: {
+            <br>sbn: { type: String }
+            <br>author_name: { type: String }
+       ,<br> }
         <br>price:{type:number}
 * borrows:
         <br>book:{
