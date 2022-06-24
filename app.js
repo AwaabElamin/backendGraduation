@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const usersRouter = require('./routes/users');
 const autherizeRouter = require('./routes/auth');
+const booksRouter = require('./routes/books');
 const connection =`mongodb+srv://${process.env.dbUserName}:${process.env.dbPassword}@cluster0.wpzy5.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority`;
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(cors());
 
 app.use('',autherizeRouter);
 app.use('/users', usersRouter);
+app.use('/books', booksRouter);
 
 
 app.listen(3000, console.log('Listening on 3000...'))
