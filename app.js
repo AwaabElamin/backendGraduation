@@ -5,6 +5,7 @@ require('dotenv').config();
 
 
 const usersRouter = require('./routes/users');
+const cardRouter = require('./routes/card');
 const autherizeRouter = require('./routes/auth');
 const booksRouter = require('./routes/books');
 const connection =`mongodb+srv://${process.env.dbUserName}:${process.env.dbPassword}@cluster0.wpzy5.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority`;
@@ -24,6 +25,7 @@ app.use(cors());
 
 app.use('',autherizeRouter);
 app.use('/users', usersRouter);
+app.use('/card', cardRouter);
 app.use('/books', booksRouter);
 
 
