@@ -3,12 +3,18 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const userSchema = mongoose.Schema(
     {
-        username: { type: String, unique: true },
-        password: { type: String },
-        email: { type: String, unique: true },
-        phone: { type: String },
-        role: { type: String },
-        address: { type: String }
+        username: { type: String, unique: true }
+        , password: { type: String }
+        , email: { type: String, unique: true }
+        , phone: { type: String }
+        , role: { type: String }
+        , address: { type: String }
+        ,card:[
+            {
+                bookTitle:{type:String}
+                ,bookPrice:{type:String}
+            }
+        ]
     }
 );
 const userModel = mongoose.model('users', userSchema);
@@ -30,7 +36,7 @@ class UserCollection {
             console.log('create:- ', new_user);
             return { success: true, data: new_user };
         } catch (error) {
-            console.log('Awaab.code: ',error.code);
+            console.log('Awaab.code: ', error.code);
             if (error.code == 11000) {
                 return { success: false, message: "users already exist" };
             } else {
@@ -47,14 +53,31 @@ class UserCollection {
             return { success: true, data: updatedUser };
         } catch (error) {
             return { success: false, message: error };
-            
+
         }
     }
+    static async findAndUpdateRole(email, role) {
+        console.log('email: ', email);
+        console.log('role: ', role);
+        try {
+            const updatedUser = await userModel.findOneAndUpdate({ email: email }, {
+                $set: {
+                    role: role
+                }
+            });
+            console.log('findAndUpdateRole:- ', updatedUser);
+            return { success: true, data: updatedUser };
+        } catch (error) {
+            return { success: false, message: error };
+
+        }
+    }
+
     static async findAndDelete(id) {
         try {
             const deltedUser = await userModel.findByIdAndDelete(id);
             console.log('findAndDelete:- ', deltedUser);
-            return {success:true, data:deltedUser};
+            return { success: true, data: deltedUser };
         } catch (error) {
             return { success: false, message: error };
         }
@@ -66,6 +89,11 @@ class UserCollection {
         const foundedUser = await userModel.findOne({ username: username });
         console.log('find user by username:- ', foundedUser);
         return foundedUser;
+    }
+
+    //card
+    static async addBookToCard(user_id,book){
+        //add book
     }
 }
 module.exports = UserCollection;
