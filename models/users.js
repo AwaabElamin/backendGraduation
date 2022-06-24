@@ -9,10 +9,10 @@ const userSchema = mongoose.Schema(
         , phone: { type: String }
         , role: { type: String }
         , address: { type: String }
-        ,card:[
+        , card: [
             {
-                bookTitle:{type:String}
-                ,bookPrice:{type:String}
+                bookTitle: { type: String }
+                , bookPrice: { type: String }
             }
         ]
     }
@@ -92,8 +92,40 @@ class UserCollection {
     }
 
     //card
-    static async addBookToCard(user_id,book){
-        //add book
+    static async addBookToCard(user_email, book) {
+        try {
+            const addedCard = await userModel.updateOne(
+                { email: user_email }
+                , {
+                    $push: { card: [book] }
+                }
+            )
+            return {success:true, data:addedCard};
+        } catch (error) {
+            return { success: false, message: error };
+        }
+    }
+    static async deleteBookfromCard(user_email, book_id) {
+        try {
+            const addedCard = await userModel.findOneAndUpdate(
+                { email: user_email }
+                , {
+                    $pull: { card:{_id: book_id }}
+                }
+            )
+            return {success:true, data:addedCard};
+        } catch (error) {
+            return { success: false, message: error };
+        }
+    }
+    static async getAllCard (user_email){
+        try {
+            console.log('user email: ',user_email);
+            const card = await userModel.findOne({email: user_email});
+            return {success:true, data: card.card};
+        } catch (error) {
+            return { success: false, message: error };
+        }        
     }
 }
 module.exports = UserCollection;

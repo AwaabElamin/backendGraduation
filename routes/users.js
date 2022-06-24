@@ -10,5 +10,8 @@ router.put('',authorizationController.authorize,usersController.update);
 router.put('/role',authorizationController.authorize,authorizationController.adminAuthorize,usersController.updateRole);
 router.delete('',authorizationController.authorize,usersController.delete);
 
+//card
+router.post('/card',authorizationController.authorize,usersController.addBookToCard);
+router.get('/card',authorizationController.authorize,usersController.getAllCard);
 
 module.exports = router;
