@@ -5,7 +5,6 @@ const private_key = 'awaabelamin';
 
 exports.login = async (req, res) => {
     console.log("login controller");
-    console.log('process.env.private_key: ', process.env.private_key)
     const { username, password } = req.body;
     console.log(`username: ${username}, password: ${password}`);
     let user = await userModel.findByUserName(username);
