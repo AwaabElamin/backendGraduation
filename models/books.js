@@ -20,9 +20,14 @@ class bookCollection {
         return books;
     }
     static async findById(id) {
-        const book = await bookModel.findById(id);
-        console.log('findById:- ', book);
-        return book;
+        try {
+            const book = await bookModel.findById(id);
+            console.log('findById:- ', book);
+            return {status:true,data:book};
+        } catch (error) {
+            return { status: false, message: error }
+        }
+
     }
     static async create(book) {
         const new_book = new bookModel(book);
