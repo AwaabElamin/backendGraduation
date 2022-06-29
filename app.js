@@ -8,6 +8,7 @@ const usersRouter = require('./routes/users');
 const cardRouter = require('./routes/card');
 const autherizeRouter = require('./routes/auth');
 const booksRouter = require('./routes/books');
+const borrowRouter = require('./routes/borrows');
 const connection =`mongodb+srv://${process.env.dbUserName}:${process.env.dbPassword}@cluster0.wpzy5.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority`;
 
 const app = express();
@@ -27,6 +28,7 @@ app.use('',autherizeRouter);
 app.use('/users', usersRouter);
 app.use('/card', cardRouter);
 app.use('/books', booksRouter);
+app.use('/borrow', borrowRouter);
 
 
 app.listen(3001, console.log('Listening on 3001...'))
