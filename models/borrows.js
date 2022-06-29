@@ -6,7 +6,7 @@ const borrowSchema = mongoose.Schema(
         book: {
             id: { type: String }
             , name: { type: String }
-            , price: { type: number }
+            , price: { type: Number }
         }
         , user: {
             id: { type: String }
@@ -16,7 +16,7 @@ const borrowSchema = mongoose.Schema(
         , borrowDate: { type: String }
         , borrowReturn: { type: String }
         , actualReturnDate: { type: String }
-        , penalty: { type: number } //$10 for each day late
+        , penalty: { type: Number } //$10 for each day late
     }
 );
 const borrowModel = mongoose.model('borrows', borrowSchema);

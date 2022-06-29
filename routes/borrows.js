@@ -10,7 +10,7 @@ router.put('',authorizationController.authorize,borrowsController.update);
 router.delete('',authorizationController.authorize,authorizationController.adminAuthorize,borrowsController.delete);
 
 //card
-router.post('/card',authorizationController.authorize,borrowsController.addBookToCard);
-router.get('/card',authorizationController.authorize,borrowsController.getAllCard);
+router.post('/card',authorizationController.authorize,borrowsController.create);
+router.get('/card',authorizationController.authorize,borrowsController.getAll);
 
 module.exports = router;
