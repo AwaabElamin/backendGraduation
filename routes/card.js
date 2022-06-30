@@ -12,7 +12,7 @@ const router = express.Router();
 
 //card
 router.post('',authorizationController.authorize,usersController.addBookToCard);
-router.get('',authorizationController.authorize,usersController.getAllCard);
+router.post('/all',authorizationController.authorize,usersController.getAllCard);
 router.delete('',authorizationController.authorize,usersController.deleteBookFromCard);
 
 module.exports = router;
