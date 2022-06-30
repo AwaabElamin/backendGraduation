@@ -14,7 +14,7 @@ exports.login = async (req, res) => {
                 const accessToken = jwt.sign(
                     { username, role: user.role, id: user._id },
                     process.env.private_key, { expiresIn: 4 * 60 * 60 });
-                res.send({ success: true, token: accessToken, role: user.role, email:user.email });
+                res.send({ success: true, token: accessToken, role: user.role, email:user.email,id: user._id });
             } else {
                 res.send({ success: false, message: 'Wrong password' });
             }
